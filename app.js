@@ -184,6 +184,18 @@ function actualizarTotalCarrito() {
   document.getElementsByClassName("carrito-precio-total")[0].innerText =
     "$" + total.toLocaleString("es") + ",00";
 }
+document.addEventListener("keyup", (e) => {
+  if (e.target.matches("#buscador")) {
+    document.querySelectorAll(".item").forEach((producto) => {
+      producto.textContent.toLowerCase().includes(e.target.value)
+        ? producto.classList.remove("filtro")
+        : producto.classList.add("filtro");
+    });
+    if (e.key === "Escape") {
+      e.target.value = "";
+    }
+  }
+});
 //formulario
 function validar() {
   var nombre, apellidos, correo, usuario, clave, telefono, expresion;
@@ -227,3 +239,6 @@ function validar() {
     return false;
   }
 }
+document.getElementById("boton1").onclick = function () {
+  prompt("Ingresa tu usuario");
+};

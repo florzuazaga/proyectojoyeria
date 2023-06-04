@@ -1,162 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./stylo.css">
-    <title>Tienda de joyas</title>
-</head>
-<body>
-    <h1></h1>
-    <span class="titulo" style="--n:1">T</span>
-    <span class="titulo" style="--n:2">i</span>
-    <span class="titulo" style="--n:3">e</span>
-    <span class="titulo" style="--n:4">n</span>
-    <span class="titulo" style="--n:5">d</span>
-    <span class="titulo" style="--n:6">a</span>
-    </header>
-    <section class="contenedor">
-        <div class="contenedor-items">
-          <div class="row justify-content-center">
-            <div class="col-6">
-              <h2 class="text-center">Buscador</h2>
-              <input type="search" placeholder="buscar..." class="buscador-form-control ab-3" id="buscador">
-              <div class="items text-center">
-                <ul class="list-group pb-3">
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                      <span class="titulo-item">Pulsera de Oro 18 kts - tipo Gucci</span>
-                      <img src="./img/pulsera.jpg" alt="pulsera" class="img-item">
-                      <span class="precio-item">$542.187</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                    <span class="titulo-item">Anillo de Oro 18kts - con Topacio Sintético Central</span>
-                    <img src="./img/anillo.webp" alt="anillo" class="img-item">
-                    <span class="precio-item">$105.075</span>
-                    <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                      <span class="titulo-item">Knock Nap</span>
-                      <img src="./img/knocknap.png" alt="reloj" class="img-item">
-                      <span class="precio-item">$35.000</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                      <span class="titulo-item">Cadena de Plata 925 - Chata fina</span>
-                      <img src="./img/cadena.jpg" alt="cadena" class="img-item">
-                      <span class="precio-item">$4.670</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item" class="articulos list-group-item">
-                      <span class="titulo-item">Silver All</span>
-                      <img src="./img/reloj.png" alt="silverall" class="img-item">
-                      <span class="precio-item">$32.000</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                      <span class="titulo-item">Aros de Oro Amarillo y Blanco 18 kilates combinados</span>
-                      <img src="./img/aros.jpg" alt="aros" class="img-item">
-                      <span class="precio-item">$168.120</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item" >
-                      <span class="titulo-item">Alianza de Oro 18 kilates Clasica Cinta</span>
-                      <img src="./img/alianza.jpg" alt="alianza" class="img-item">
-                      <span class="precio-item">$95.258</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                      <span class="titulo-item">Dije de Oro 18 kts</span>
-                      <img src="./img/dije.jpg" alt="dije" class="img-item">
-                      <span class="precio-item">$46.233</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-                  <li class="articulos-list-group-items">
-                    <div class="item">
-                      <span class="titulo-item">Abridores de Oro 18 kts - con una Piedra Engarzada Chica</span>
-                      <img src="./img/abridores.jpg" alt="abridores" class="img-item">
-                      <span class="precio-item">$28.720</span>
-                      <button class="boton-item">Agregar al Carrito</button>
-                    </div>
-                  </li>
-              </div>
-            </div>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JoyasShop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="stylesheet" href="./stylo.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header-mobile">
+        <h1 class="logo">joyasShop</h1>
+        <button class="open-menu" id="open-menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </header>
+      <aside>
+        <button class="close-menu" id="close-menu">
+          <i class="bi bi-x"></i>
+        </button>
+        <header>
+          <h1 class="logo">joyasShop</h1>
+        </header>
+        <nav>
+          <ul class="menu">
+            <li>
+              <button id="todos" class="boton-menu boton-categoria active">
+                <i class="bi bi-hand-index-thumb-fill"></i> Todos los productos
+              </button>
+            </li>
+            <li>
+              <button id="alianza" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i> Alianza
+              </button>
+            </li>
+            <li>
+              <button id="reloj" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i>Reloj
+              </button>
+            </li>
+            <li>
+              <button id="abridores" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i> Abridores
+              </button>
+            </li>
+            <li>
+              <button id="dije" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i> Dije
+              </button>
+            </li>
+            <li>
+              <button id="cadena" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i> Cadena
+              </button>
+            </li>
+            <li>
+              <button id="anillo" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i> Anillo
+              </button>
+            </li>
+            <li>
+              <button id="aros" class="boton-menu boton-categoria">
+                <i class="bi bi-hand-index-thumb"></i> Aros
+              </button>
+            </li>
+            <li>
+              <a class="boton-menu boton-carrito" href="./carrito.html">
+                <i class="bi bi-cart-fill"></i> Carrito
+                <span id="numerito" class="numerito">0</span>
+              </a>
+            </li>
           </ul>
-        </div>   
+        </nav>
+      </aside>
+      <main>
+        <h2 class="titulo-principal" id="titulo-principal">
+          Todos los productos
+        </h2>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/alianza.jpg" alt="alianza" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">Alianza de 18kts cinta clasica</h3>
+            <p class="producto-precio">$95.258</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
         </div>
-        <!-- Carrito de Compras -->
-        <div class="carrito" id="carrito">
-            <div class="header-carrito">
-                <h2>Tu Carrito</h2>
-            </div>
-
-            <div class="carrito-items">
-                <!-- 
-                <div class="carrito-item">
-                    <img src="./img/pulsera.jpg" width="80px" alt="pulsera">
-                    <div class="carrito-item-detalles">
-                        <span class="carrito-item-titulo">Pulsera de Oro 18 kts - tipo Gucci</span>
-                        <div class="selector-cantidad">
-                            <i class="fa-solid fa-minus restar-cantidad"></i>
-                            <input type="text" value="1" class="carrito-item-cantidad" disabled>
-                            <i class="fa-solid fa-plus sumar-cantidad"></i>
-                        </div>
-                        <span class="carrito-item-precio">$542.187</span>
-                    </div>
-                   <span class="btn-eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                   </span>
-                </div>
-                <div class="carrito-item">
-                    <img src="./img/reloj.png" width="80px" alt="silverall">
-                    <div class="carrito-item-detalles">
-                        <span class="carrito-item-titulo">Silver All</span>
-                        <div class="selector-cantidad">
-                            <i class="fa-solid fa-minus restar-cantidad"></i>
-                            <input type="text" value="3" class="carrito-item-cantidad" disabled>
-                            <i class="fa-solid fa-plus sumar-cantidad"></i>
-                        </div>
-                        <span class="carrito-item-precio">$32.000</span>
-                    </div>
-                   <button class="btn-eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                   </button>
-                </div>
-                 -->
-            </div>
-            <div class="carrito-total">
-                <div class="fila">
-                    <strong>Tu Total</strong>
-                    <span class="carrito-precio-total">
-                        $1.057.263
-                    </span>
-                </div>
-                <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
-            </div>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/reloj.png" alt="reloj" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">Silver All</h3>
+            <p class="producto-precio">$32.000</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
         </div>
-    </section>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img
+            class="producto-imagen"
+            src="./img/abridores.jpg"
+            alt="abridores"
+          />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">Abridores de oro 18kts</h3>
+            <p class="producto-precio">$28720</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
+        </div>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/dije.jpg" alt="dije" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">Dije de oro 18kts</h3>
+            <p class="producto-precio">$46.233</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
+        </div>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/cadena.jpg" alt="cadena" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">Cadena de plata 925</h3>
+            <p class="producto-precio">$4.670</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
+        </div>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/anillo.webp" alt="anillo" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">
+              Anillo de oro 18kts con topacio sintético central
+            </h3>
+            <p class="producto-precio">$105.075</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
+        </div>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/aros.jpg" alt="aros" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">
+              Aros de oro ammarillo y blanco 18kts combinados
+            </h3>
+            <p class="producto-precio">
+              $168.120/p>
+              <button class="producto-agregar">Agregar</button>
+            </p>
+          </div>
+        </div>
+        <div id="contenedor-productos" class="contenedor-productos"></div>
+        <div class="producto">
+          <img class="producto-imagen" src="./img/pulsera.jpg" alt="pulsera" />
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">Pulsera de oro 18kts-tipo gucci</h3>
+            <p class="producto-precio">$542.187</p>
+            <button class="producto-agregar">Agregar</button>
+          </div>
+        </div>
+      </main>
+    </div>
     <!--suscripcion-->
     <div class="noise"></div>
-    <h1 id="registrate">Registrate</h1>
+    <h2 id="registrate">Registrate</h2>
     <form
       action="https://formsubmit.co/florenciazuazaga47@gmail.com"
       method="post"
@@ -213,30 +229,42 @@
           required
         />
         <input type="submit" value="Registrar" class="btn-enviar" />
-        <button id="boton1"><p class="form__link">
-          ¿Ya tienes una cuenta? <a href="#">Ingresa aquí</a>
-        </p></button>
+        <button id="boton1">
+          <p class="form__link">
+            ¿Ya tienes una cuenta? <a href="#">Ingresa aquí</a>
+          </p>
+        </button>
       </div>
       <a href="mailto:florenciazuazaga47@gmail.com" id="mail">mail</a>
     </form>
     <footer>
-        <div class="mediosdePago">
-          <h6>Medios de pago</h6>
-          <img src="./img/mediosdepago.png" alt="mediosdepago" />
-          <p class="text">
-            Copyright © 1995-2023 <br />
-            Tienda de Joyas S.A.<br />
-            TODOS LOS DERECHOS RESERVADOS.<br />
-            TACUARÍ 1842 (C1139AAN) CABA <br />
-            CUIT Nº: 30-53409751-0
-          </p>
-          <div class="datafiscal">
-            <img src="./img/DATAWEB.jpg" alt="datafiscal" />
-            <img src="./img/datafiscal2.jpg" alt="datafiscal2" />
-          </div>
+      <div class="mediosdePago">
+        <h6>Medios de pago</h6>
+        <img src="./img/mediosdepago.png" alt="mediosdepago" />
+        <p class="text">
+          Copyright © 1995-2023 <br />
+          Tienda de Joyas S.A.<br />
+          TODOS LOS DERECHOS RESERVADOS.<br />
+          TACUARÍ 1842 (C1139AAN) CABA <br />
+          CUIT Nº: 30-53409751-0
+        </p>
+        <div class="datafiscal">
+          <img src="./img/DATAWEB.jpg" alt="datafiscal" />
+          <img src="./img/datafiscal2.jpg" alt="datafiscal2" />
         </div>
-      </footer>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+      </div>
+    </footer>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <script src="main.js"></script>
+    <script src="./menu.js"></script>
     <script src="app.js" async></script>
-</body>
+  </body>
 </html>

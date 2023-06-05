@@ -1,85 +1,10 @@
-const productos = [
-  {
-    id: "alianza",
-    titulo: "Alianza ",
-    imagen: "./img/alianza.jpg",
-    categoria: {
-      nombre: "Alianza",
-      id: "alianza",
-    },
-    precio: 95258,
-  },
-  {
-    id: "reloj",
-    titulo: "Reloj",
-    imagen: "./img/reloj.png",
-    categoria: {
-      nombre: "Reloj",
-      id: "reloj",
-    },
-    precio: 32000,
-  },
-  {
-    id: "abridores",
-    titulo: "Abridores de oro 18kts",
-    imagen: "./img/abridores.jpg",
-    categoria: {
-      nombre: "Abridores",
-      id: "abridores",
-    },
-    precio: 28270,
-  },
-  {
-    id: "dije",
-    titulo: "Dije de oro 18kts",
-    imagen: "./img/dije.jpg",
-    categoria: {
-      nombre: "Dije",
-      id: "dije",
-    },
-    precio: 46233,
-  },
-  {
-    id: "cadena",
-    titulo: "Cadena de plata 925",
-    imagen: "./img/cadena.jpg",
-    categoria: {
-      nombre: "Cadena",
-      id: "cadena",
-    },
-    precio: 4670,
-  },
-  {
-    id: "anillo",
-    titulo: "Anillo de oro 18kts con topacio sintético central",
-    imagen: "./img/anillo.webp",
-    categoria: {
-      nombre: "Anillo",
-      id: "anillo",
-    },
-    precio: 105075,
-  },
-  {
-    id: "aros",
-    titulo: "Aros de oro ammarillo y blanco 18kts combinados",
-    imagen: "./img/aros.jpg",
-    categoria: {
-      nombre: "Aros",
-      id: "aros",
-    },
-    precio: 168120,
-  },
-  {
-    id: "pulsera",
-    titulo: "Pulsera de oro 18kts-tipo gucci",
-    imagen: "./img/pulsera.jpg",
-    categoria: {
-      nombre: "pulsera",
-      id: "pulsera",
-    },
-    precio: 542187,
-  },
-];
+let productos = [];
+fetch("./js/productos.json")
+  .then((response) => response.json())
+  .then((data) => {
+    productos = data;
+    cargarProductos(productos);
+  });
 const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
@@ -131,6 +56,7 @@ function actualizarBotonesAgregar() {
     boton.addEventListener("click", agregarAlCarrito);
   });
 }
+
 let productosEnCarrito;
 
 let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");

@@ -41,6 +41,3 @@ function validar() {
     return false;
   }
 }
-document.getElementById("boton1").onclick = function () {
-  prompt("Ingresa tu usuario");
-};

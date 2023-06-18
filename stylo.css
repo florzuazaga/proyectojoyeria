@@ -140,10 +140,10 @@ aside {
 
 main {
   background-color: var(--clr-white);
-  margin: 1rem;
+  margin: 0.8rem;
   margin-left: 0;
-  border-radius: 2rem;
-  padding: 3rem;
+  border-radius: 1rem;
+  padding: 2rem;
 }
 
 .titulo-principal {
@@ -158,41 +158,30 @@ main {
 }
 
 .producto-imagen {
-  max-width: 100%;
+  max-width: 30%;
   border-radius: 1rem;
 }
 
 .producto-detalles {
-  background-color: var(--clr-main);
-  color: var(--clr-white);
+  background-color: #fff;
+  color: #000;
   padding: 0.5rem;
-  border-radius: 1rem;
-  margin-top: -2rem;
+  border-radius: 0.5rem;
+  margin-top: -1rem;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
+.botonagregar {
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  text-transform: uppercase;
+  padding: 0.4rem;
+}
 
 .producto-titulo {
-  font-size: 1rem;
-}
-
-.producto-agregar {
-  border: 0;
-  background-color: var(--clr-white);
-  color: var(--clr-main);
-  padding: 0.4rem;
-  text-transform: uppercase;
-  border-radius: 2rem;
-  cursor: pointer;
-  border: 2px solid var(--clr-white);
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.producto-agregar:hover {
-  background-color: var(--clr-main);
-  color: var(--clr-white);
+  font-size: 0.8rem;
 }
 
 /** CARRITO **/
@@ -395,6 +384,12 @@ main {
   .contenedor-productos {
     grid-template-columns: 1fr;
   }
+}
+.sumar {
+  cursor: pointer;
+}
+.restar {
+  cursor: pointer;
 }
 /*formulario*/
 #registrate {

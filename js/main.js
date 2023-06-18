@@ -1,35 +1,121 @@
-let productos = [];
-fetch("./productos.json")
-  .then((response) => response.json())
-  .then((data) => {
-    productos = data;
-    cargarProductos(productos);
-  });
+const product = document.getElementById("conteinerproductos");
+const verCarrito = document.getElementById("vercarrito");
+const modalCarrito = document.getElementById("modal-carrito");
+const productos = [
+  {
+    id: "alianza",
+    titulo: "Alianza ",
+    imagen: "./img/alianza.jpg",
+    categoria: {
+      nombre: "Alianza",
+      id: "alianza",
+    },
+    precio: 95258,
+  },
+  {
+    id: "reloj",
+    titulo: "Reloj",
+    imagen: "./img/reloj.png",
+    categoria: {
+      nombre: "Reloj",
+      id: "reloj",
+    },
+    precio: 32000,
+  },
+  {
+    id: "abridores",
+    titulo: "Abridores de oro 18kts",
+    imagen: "./img/abridores.jpg",
+    categoria: {
+      nombre: "Abridores",
+      id: "abridores",
+    },
+    precio: 28270,
+  },
+  {
+    id: "dije",
+    titulo: "Dije de oro 18kts",
+    imagen: "./img/dije.jpg",
+    categoria: {
+      nombre: "Dije",
+      id: "dije",
+    },
+    precio: 46233,
+  },
+  {
+    id: "cadena",
+    titulo: "Cadena de plata 925",
+    imagen: "./img/cadena.jpg",
+    categoria: {
+      nombre: "Cadena",
+      id: "cadena",
+    },
+    precio: 4670,
+  },
+  {
+    id: "anillo",
+    titulo: "Anillo de oro 18kts con topacio sintético central",
+    imagen: "./img/anillo.webp",
+    categoria: {
+      nombre: "Anillo",
+      id: "anillo",
+    },
+    precio: 105075,
+  },
+  {
+    id: "aros",
+    titulo: "Aros de oro ammarillo y blanco 18kts combinados",
+    imagen: "./img/aros.jpg",
+    categoria: {
+      nombre: "Aros",
+      id: "aros",
+    },
+    precio: 168120,
+  },
+  {
+    id: "pulsera",
+    titulo: "Pulsera de oro 18kts-tipo gucci",
+    imagen: "./img/pulsera.jpg",
+    categoria: {
+      nombre: "pulsera",
+      id: "pulsera",
+    },
+    precio: 542187,
+  },
+];
+let carrito = [];
 const conteinerProductos = document.querySelector("#conteinerproductos");
-const botonesCategorias = document.querySelectorAll(".boton-categoria");
-const tituloProducto = document.querySelector("#tituloproducto");
-let botonesAgregar = document.querySelectorAll(".producto-agregar");
-const numerocatalogo = document.querySelector("#numerocatalogo");
-
-function cargarProductos(productosElegidos) {
+function cargarCarrito(productos) {
   conteinerProductos.innerHTML = "";
+  productos.forEach((producto) => {
+    let content = document.createElement("div");
+    content.className = "conteiner";
+    content.innerHTML = `
+  <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+  <div class="producto-detalles">
+      <h3 class="producto-titulo">${producto.titulo}</h3>
+      <p class="producto-precio">$${producto.precio}</p>
+  </div>
+  `;
+    product.append(content);
+    let agregar = document.createElement("button");
+    agregar.innerText = "agregar";
+    agregar.className = "botonagregar";
 
-  productosElegidos.forEach((producto) => {
-    const div = document.createElement("div");
-    div.classList.add("producto");
-    div.innerHTML = `
-    <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-    <div class="producto-detalles">
-        <h3 class="producto-titulo">${producto.titulo}</h3>
-        <p class="producto-precio">$${producto.precio}</p>
-        <button class="producto-agregar" id="${producto.id}">Agregar</button>
-    </div>
-`;
-    conteinerProductos.append(div);
+    content.append(agregar);
+
+    agregar.addEventListener("click", () => {
+      carrito.push({
+        id: producto.id,
+        img: producto.imagen,
+        titulo: producto.titulo,
+        precio: producto.precio,
+      });
+    });
   });
-  actualizarBotonesAgregar();
 }
-
+const tituloProducto = document.querySelector("#tituloproducto");
+const botonesCategorias = document.querySelectorAll(".boton-categoria");
 botonesCategorias.forEach((boton) => {
   boton.addEventListener("click", (e) => {
     botonesCategorias.forEach((boton) => boton.classList.remove("active"));
@@ -42,76 +128,44 @@ botonesCategorias.forEach((boton) => {
       const productosBoton = productos.filter(
         (producto) => producto.categoria.id === e.currentTarget.id
       );
-      cargarProductos(productosBoton);
+      cargarCarrito(productosBoton);
     } else {
       tituloProducto.innerText = "Todos los productos";
-      cargarProductos(productos);
+      cargarCarrito(productos);
     }
   });
 });
-function actualizarBotonesAgregar() {
-  botonesAgregar = document.querySelectorAll(".producto-agregar");
+verCarrito.addEventListener("click", () => {
+  modalCarrito.innerHTML = ``;
+  modalCarrito.style.display = "flex";
+  const modalprincipio = document.createElement("div");
+  modalprincipio.className = "modal-principio";
+  modalprincipio.innerHTML = `
+  <h1 class="modal-principio-bienvenida">Bienvenido a tu compra</h1>
+  `;
+  modalCarrito.append(modalprincipio);
 
-  botonesAgregar.forEach((boton) => {
-    boton.addEventListener("click", agregarAlCarrito);
+  const modalbutton = document.createElement("h2");
+  modalbutton.innerText = "Cerrar";
+  modalbutton.className = "modal-principio-button";
+  modalprincipio.append(modalbutton);
+  modalbutton.addEventListener("click", () => {
+    modalCarrito.style.display = "none";
   });
-}
 
-let productosEnCarrito;
-
-let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
-
-if (productosEnCarritoLS) {
-  productosEnCarrito = JSON.parse(productosEnCarritoLS);
-  actualizarNumerocatalogo();
-} else {
-  productosEnCarrito = [];
-}
-function agregarAlCarrito(e) {
-  Toastify({
-    text: "Producto agregado",
-    duration: 3000,
-    close: true,
-    gravity: "top",
-    position: "right",
-    stopOnFocus: true,
-    style: {
-      background: "linear-gradient(to right, #4b33a8, #785ce9)",
-      borderRadius: "2rem",
-      textTransform: "uppercase",
-      fontSize: ".75rem",
-    },
-    offset: {
-      x: "1.5rem",
-      y: "1.5rem",
-    },
-    onClick: function () {},
-  }).showToast();
-
-  const idBoton = e.currentTarget.id;
-  const productoAgregado = productos.find(
-    (producto) => producto.id === idBoton
-  );
-
-  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
-    const index = productosEnCarrito.findIndex(
-      (producto) => producto.id === idBoton
-    );
-    productosEnCarrito[index].cantidad++;
-  } else {
-    productoAgregado.cantidad = 1;
-    productosEnCarrito.push(productoAgregado);
-  }
-  actualizarNumerocatalogo();
-  localStorage.setItem(
-    "productos-en-carrito",
-    JSON.stringify(productosEnCarrito)
-  );
-}
-function actualizarNumerocatalogo() {
-  let nuevoNumerocatalogo = productosEnCarrito.reduce(
-    (acc, producto) => acc + producto.cantidad,
-    0
-  );
-  numerocatalogo.innerText = nuevoNumerocatalogo;
-}
+  carrito.forEach((producto) => {
+    let carritoContent = document.createElement("div");
+    carritoContent.className = "modal-contenido";
+    carritoContent.innerHTML = `
+    <img src="${producto.imagen}">
+      <h3 >${producto.titulo}</h3>
+      <p c>$${producto.precio}</p>
+    `;
+    modalCarrito.append(carritoContent);
+  });
+  const total = carrito.reduce((acc, el) => acc + el.precio, 0);
+  const totalcomprar = document.createElement("div");
+  totalcomprar.className = "totalproductos";
+  totalcomprar.innerHTML = `total a abonar:${total}`;
+  modalCarrito.append(totalcomprar);
+});

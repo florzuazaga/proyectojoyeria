@@ -10,6 +10,7 @@ const productos = [
       nombre: "Alianza",
       id: "alianza",
     },
+    cantidad: 1,
     precio: 95258,
   },
   {
@@ -20,6 +21,7 @@ const productos = [
       nombre: "Reloj",
       id: "reloj",
     },
+    cantidad: 1,
     precio: 32000,
   },
   {
@@ -30,6 +32,7 @@ const productos = [
       nombre: "Abridores",
       id: "abridores",
     },
+    cantidad: 1,
     precio: 28270,
   },
   {
@@ -40,6 +43,7 @@ const productos = [
       nombre: "Dije",
       id: "dije",
     },
+    cantidad: 1,
     precio: 46233,
   },
   {
@@ -50,6 +54,7 @@ const productos = [
       nombre: "Cadena",
       id: "cadena",
     },
+    cantidad: 1,
     precio: 4670,
   },
   {
@@ -60,6 +65,7 @@ const productos = [
       nombre: "Anillo",
       id: "anillo",
     },
+    cantidad: 1,
     precio: 105075,
   },
   {
@@ -70,6 +76,7 @@ const productos = [
       nombre: "Aros",
       id: "aros",
     },
+    cantidad: 1,
     precio: 168120,
   },
   {
@@ -80,6 +87,7 @@ const productos = [
       nombre: "pulsera",
       id: "pulsera",
     },
+    cantidad: 1,
     precio: 542187,
   },
 ];
@@ -91,13 +99,14 @@ function cargarCarrito(productos) {
     let content = document.createElement("div");
     content.className = "conteiner";
     content.innerHTML = `
-  <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-  <div class="producto-detalles">
+      <img class="producto-imagen"src="${producto.imagen}" alt="${producto.titulo}">
+    <div class="producto-detalles">
       <h3 class="producto-titulo">${producto.titulo}</h3>
       <p class="producto-precio">$${producto.precio}</p>
-  </div>
+      <p>cantidad: ${producto.cantidad}</p>
   `;
     product.append(content);
+
     let agregar = document.createElement("button");
     agregar.innerText = "agregar";
     agregar.className = "botonagregar";
@@ -105,12 +114,24 @@ function cargarCarrito(productos) {
     content.append(agregar);
 
     agregar.addEventListener("click", () => {
-      carrito.push({
-        id: producto.id,
-        img: producto.imagen,
-        titulo: producto.titulo,
-        precio: producto.precio,
-      });
+      const repeat = carrito.some(
+        (repeatProducto) => repeatProducto.id === producto.id
+      );
+      if (repeat) {
+        carrito.map((prod) => {
+          if (prod.id === producto.id) {
+            prod.cantidad++;
+          }
+        });
+      } else {
+        carrito.push({
+          id: producto.id,
+          img: producto.imagen,
+          titulo: producto.titulo,
+          precio: producto.precio,
+          cantidad: producto.cantidad,
+        });
+      }
     });
   });
 }
@@ -135,7 +156,7 @@ botonesCategorias.forEach((boton) => {
     }
   });
 });
-verCarrito.addEventListener("click", () => {
+const vermicarrito = () => {
   modalCarrito.innerHTML = ``;
   modalCarrito.style.display = "flex";
   const modalprincipio = document.createElement("div");
@@ -157,15 +178,30 @@ verCarrito.addEventListener("click", () => {
     let carritoContent = document.createElement("div");
     carritoContent.className = "modal-contenido";
     carritoContent.innerHTML = `
-    <img src="${producto.imagen}">
       <h3 >${producto.titulo}</h3>
-      <p c>$${producto.precio}</p>
+      <p>$${producto.precio}</p>
+      <p>${producto.cantidad}</p>
+      <p>${producto.cantidad * producto.precio}</p>
     `;
     modalCarrito.append(carritoContent);
+    let eliminar = document.createElement("span");
+    eliminar.innerText = "⚔";
+    eliminar.className = "eliminar-producto";
+    carritoContent.append(eliminar);
+
+    eliminar.addEventListener("click", eliminarAgregado);
   });
-  const total = carrito.reduce((acc, el) => acc + el.precio, 0);
+  const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
   const totalcomprar = document.createElement("div");
   totalcomprar.className = "totalproductos";
   totalcomprar.innerHTML = `total a abonar:${total}`;
   modalCarrito.append(totalcomprar);
-});
+};
+verCarrito.addEventListener("click", vermicarrito);
+const eliminarAgregado = () => {
+  const foundId = carrito.find((Element) => Element.id);
+  carrito = carrito.filter((compraId) => {
+    return compraId !== foundId;
+  });
+  vermicarrito();
+};

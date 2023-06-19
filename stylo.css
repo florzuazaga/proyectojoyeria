@@ -385,10 +385,10 @@ main {
     grid-template-columns: 1fr;
   }
 }
-.sumar {
+#sumar {
   cursor: pointer;
 }
-.restar {
+#restar {
   cursor: pointer;
 }
 .totalproductos {

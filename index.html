@@ -74,9 +74,8 @@
               </button>
             </li>
             <li>
-              <a class="boton-menu boton-carrito" href="./carrito.html">
-                <i class="bi bi-cart-fill"></i> Carrito
-                <span id="numerocatalogo" class="numerito">0</span>
+              <a class="vercarrito">
+                <h2 class="vercarrito" id="vercarrito">Carrito</h2> 
               </a>
             </li>
           </ul>
@@ -87,90 +86,7 @@
         <div id="conteinerproductos" class="conteinerproductos"></div>
       </main>
     </div>
-    <!--suscripcion-->
-    <div class="noise"></div>
-    <h2 id="registrate">Registrate</h2>
-    <form
-      id="form"
-      action="https://formsubmit.co/florenciazuazaga47@gmail.com"
-      method="post"
-      class="form-register"
-    >
-      <h2 class="form__titulo">Crea una Cuenta</h2>
-      <div class="contenedor-inputs">
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          placeholder="nombre"
-          class="input-48"
-          required
-        />
-        <input
-          type="text"
-          id="apellidos"
-          name="apellidos"
-          placeholder="apellidos"
-          class="input-48"
-          required
-        />
-        <input
-          type="email"
-          id="correo"
-          name="correo"
-          placeholder="correo"
-          class="input-100"
-          required
-        />
-        <input
-          type="text"
-          id="usuario"
-          name="usuario"
-          placeholder="usuario"
-          class="input-48"
-          required
-        />
-        <input
-          type="password"
-          id="clave"
-          name="clave"
-          placeholder="contraseña"
-          class="input-48"
-          required
-        />
-        <input
-          type="text"
-          id="telefono"
-          name="telefono"
-          placeholder="telefono"
-          class="input-100"
-          required
-        />
-        <input type="submit" value="Registrar" class="btn-enviar" />
-        <button id="boton1">
-          <p class="form__link">
-            ¿Ya tienes una cuenta? <a href="#">Ingresa aquí</a>
-          </p>
-        </button>
-      </div>
-      <a href="mailto:florenciazuazaga47@gmail.com" id="mail">mail</a>
-    </form>
-    <footer>
-      <div class="mediosdePago">
-        <h6>Medios de pago</h6>
-        <img src="./img/mediosdepago.png" alt="mediosdepago" />
-        <p class="text">
-          Copyright © 1995-2023 <br />
-          Tienda de Joyas S.A.<br />
-          TODOS LOS DERECHOS RESERVADOS.<br />
-          TACUARÍ 1842 (C1139AAN) CABA <br />
-          CUIT Nº: 30-53409751-0
-        </p>
-        <div class="datafiscal">
-          <img src="./img/DATAWEB.jpg" alt="datafiscal" />
-          <img src="./img/datafiscal2.jpg" alt="datafiscal2" />
-        </div>
-      </div>
+    <div id="modal-carrito" class="modal-carrito"></div>
     </footer>
     <script
       type="text/javascript"
@@ -182,7 +98,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="./js/main.js"></script>
-    <script src="./js/menu.js"></script>
-    <script src="./js/app.js"></script>
   </body>
 </html>

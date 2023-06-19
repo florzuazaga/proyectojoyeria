@@ -1,117 +1,143 @@
-let productos = [];
-fetch("./productos.json")
-  .then((response) => response.json())
-  .then((data) => {
-    productos = data;
-    cargarProductos(productos);
-  });
+const product = document.getElementById("conteinerproductos");
+const verCarrito = document.getElementById("vercarrito");
+const modalCarrito = document.getElementById("modal-carrito");
 const conteinerProductos = document.querySelector("#conteinerproductos");
-const botonesCategorias = document.querySelectorAll(".boton-categoria");
-const tituloProducto = document.querySelector("#tituloproducto");
-let botonesAgregar = document.querySelectorAll(".producto-agregar");
-const numerocatalogo = document.querySelector("#numerocatalogo");
 
-function cargarProductos(productosElegidos) {
-  conteinerProductos.innerHTML = "";
-
-  productosElegidos.forEach((producto) => {
-    const div = document.createElement("div");
-    div.classList.add("producto");
-    div.innerHTML = `
-    <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-    <div class="producto-detalles">
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const getProducto = async () => {
+  const respuesta = await fetch("./productos.json");
+  const datos = await respuesta.json();
+  datos.forEach((producto) => {
+    let content = document.createElement("div");
+    content.className = "conteiner";
+    content.innerHTML = `
+        <img class="producto-imagen"src="${producto.imagen}" alt="${producto.titulo}">
+      <div class="producto-detalles">
         <h3 class="producto-titulo">${producto.titulo}</h3>
         <p class="producto-precio">$${producto.precio}</p>
-        <button class="producto-agregar" id="${producto.id}">Agregar</button>
-    </div>
-`;
-    conteinerProductos.append(div);
-  });
-  actualizarBotonesAgregar();
-}
+        <p>cantidad: ${producto.cantidad}</p>
+    `;
+    product.append(content);
 
-botonesCategorias.forEach((boton) => {
-  boton.addEventListener("click", (e) => {
-    botonesCategorias.forEach((boton) => boton.classList.remove("active"));
-    e.currentTarget.classList.add("active");
-    if (e.currentTarget.id != "todos") {
-      const productoCategoria = productos.find(
-        (producto) => producto.categoria.id === e.currentTarget.id
+    let agregar = document.createElement("button");
+    agregar.innerText = "agregar";
+    agregar.className = "botonagregar";
+
+    content.append(agregar);
+
+    agregar.addEventListener("click", () => {
+      const repeat = carrito.some(
+        (repeatProducto) => repeatProducto.id === producto.id
       );
-      tituloProducto.innerText = productoCategoria.categoria.nombre;
-      const productosBoton = productos.filter(
-        (producto) => producto.categoria.id === e.currentTarget.id
-      );
-      cargarProductos(productosBoton);
-    } else {
-      tituloProducto.innerText = "Todos los productos";
-      cargarProductos(productos);
-    }
+      if (repeat) {
+        carrito.map((prod) => {
+          if (prod.id === producto.id) {
+            prod.cantidad++;
+          }
+        });
+      } else {
+        carrito.push({
+          id: producto.id,
+          img: producto.imagen,
+          titulo: producto.titulo,
+          precio: producto.precio,
+          cantidad: producto.cantidad,
+        });
+        savelocal();
+      }
+    });
   });
-});
-function actualizarBotonesAgregar() {
-  botonesAgregar = document.querySelectorAll(".producto-agregar");
-
-  botonesAgregar.forEach((boton) => {
-    boton.addEventListener("click", agregarAlCarrito);
+  const tituloProducto = document.querySelector("#tituloproducto");
+  const botonesCategorias = document.querySelectorAll(".boton-categoria");
+  botonesCategorias.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      botonesCategorias.forEach((boton) => boton.classList.remove("active"));
+      e.currentTarget.classList.add("active");
+      if (e.currentTarget.id != "todos") {
+        const productoCategoria = productos.find(
+          (producto) => producto.categoria.id === e.currentTarget.id
+        );
+        tituloProducto.innerText = productoCategoria.categoria.nombre;
+        const productosBoton = productos.filter(
+          (producto) => producto.categoria.id === e.currentTarget.id
+        );
+        cargarCarrito(productosBoton);
+      } else {
+        tituloProducto.innerText = "Todos los productos";
+        cargarCarrito(productos);
+      }
+    });
   });
-}
+};
+getProducto();
 
-let productosEnCarrito;
+const vermicarrito = () => {
+  modalCarrito.innerHTML = ``;
+  modalCarrito.style.display = "flex";
+  const modalprincipio = document.createElement("div");
+  modalprincipio.className = "modal-principio";
+  modalprincipio.innerHTML = `
+  <h1 class="modal-principio-bienvenida">Bienvenido a tu compra</h1>
+  `;
+  modalCarrito.append(modalprincipio);
 
-let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
+  const modalbutton = document.createElement("h2");
+  modalbutton.innerText = "Cerrar";
+  modalbutton.className = "modal-principio-button";
+  modalprincipio.append(modalbutton);
+  modalbutton.addEventListener("click", () => {
+    modalCarrito.style.display = "none";
+  });
 
-if (productosEnCarritoLS) {
-  productosEnCarrito = JSON.parse(productosEnCarritoLS);
-  actualizarNumerocatalogo();
-} else {
-  productosEnCarrito = [];
-}
-function agregarAlCarrito(e) {
-  Toastify({
-    text: "Producto agregado",
-    duration: 3000,
-    close: true,
-    gravity: "top",
-    position: "right",
-    stopOnFocus: true,
-    style: {
-      background: "linear-gradient(to right, #4b33a8, #785ce9)",
-      borderRadius: "2rem",
-      textTransform: "uppercase",
-      fontSize: ".75rem",
-    },
-    offset: {
-      x: "1.5rem",
-      y: "1.5rem",
-    },
-    onClick: function () {},
-  }).showToast();
+  carrito.forEach((producto) => {
+    let carritoContent = document.createElement("div");
+    carritoContent.className = "modal-contenido";
+    carritoContent.innerHTML = `
+      <h3 >${producto.titulo}</h3>
+      <p>$${producto.precio}</p>
+      <span id="restar"> - </span>
+      <p>${producto.cantidad}</p>
+      <span id="sumar"> + </span>
+      <p>${producto.cantidad * producto.precio}</p>
+    `;
+    modalCarrito.append(carritoContent);
+    let restar = carritoContent.querySelector("#restar");
+    restar.addEventListener("click", () => {
+      if (producto.cantidad !== 1) {
+        producto.cantidad--;
+      }
+      vermicarrito();
+    });
+    let sumar = carritoContent.querySelector("#sumar");
+    sumar.addEventListener("click", () => {
+      if (producto.cantidad !== 1) {
+        producto.cantidad++;
+      }
+      vermicarrito();
+    });
 
-  const idBoton = e.currentTarget.id;
-  const productoAgregado = productos.find(
-    (producto) => producto.id === idBoton
-  );
+    let eliminar = document.createElement("span");
+    eliminar.innerText = "⚔";
+    eliminar.className = "eliminar-producto";
+    carritoContent.append(eliminar);
 
-  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
-    const index = productosEnCarrito.findIndex(
-      (producto) => producto.id === idBoton
-    );
-    productosEnCarrito[index].cantidad++;
-  } else {
-    productoAgregado.cantidad = 1;
-    productosEnCarrito.push(productoAgregado);
-  }
-  actualizarNumerocatalogo();
-  localStorage.setItem(
-    "productos-en-carrito",
-    JSON.stringify(productosEnCarrito)
-  );
-}
-function actualizarNumerocatalogo() {
-  let nuevoNumerocatalogo = productosEnCarrito.reduce(
-    (acc, producto) => acc + producto.cantidad,
-    0
-  );
-  numerocatalogo.innerText = nuevoNumerocatalogo;
-}
+    eliminar.addEventListener("click", eliminarAgregado);
+  });
+  const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
+  const totalcomprar = document.createElement("div");
+  totalcomprar.className = "totalproductos";
+  totalcomprar.innerHTML = `total a abonar:${total}`;
+  modalCarrito.append(totalcomprar);
+};
+verCarrito.addEventListener("click", vermicarrito);
+const eliminarAgregado = () => {
+  const foundId = carrito.find((Element) => Element.id);
+  carrito = carrito.filter((compraId) => {
+    return compraId !== foundId;
+  });
+  savelocal();
+  vermicarrito();
+};
+const savelocal = () => {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+};

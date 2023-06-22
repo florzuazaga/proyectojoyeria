@@ -88,7 +88,6 @@ const vermicarrito = () => {
       if (producto.cantidad !== 1) {
         producto.cantidad--;
       }
-      savelocal();
       vermicarrito();
     });
     let sumar = carritoContent.querySelector(".sumar");
@@ -96,7 +95,6 @@ const vermicarrito = () => {
       if (producto.cantidad !== 1) {
         producto.cantidad++;
       }
-      savelocal();
       vermicarrito();
     });
     let eliminar = carritoContent.querySelector(".eliminar-producto");

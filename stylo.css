@@ -121,11 +121,16 @@ aside {
   margin-top: 2rem;
 }
 
-.numerito {
-  background-color: var(--clr-white);
-  color: var(--clr-main);
-  padding: 0.15rem 0.25rem;
-  border-radius: 0.25rem;
+.cantidad-carrito {
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 4px;
+  top: 37px;
+  right: 14px;
+  position: absolute;
+  display: none;
 }
 
 .boton-carrito.active .numerito {
@@ -192,11 +197,6 @@ main {
   gap: 1rem;
 }
 
-.carrito-vacio,
-.carrito-comprado {
-  color: var(--clr-main);
-}
-
 .carrito-productos {
   display: flex;
   flex-direction: column;
@@ -222,14 +222,6 @@ main {
 .carrito-producto small {
   font-size: 0.5rem;
 }
-
-.carrito-producto-eliminar {
-  border: 0;
-  background-color: transparent;
-  color: var(--clr-red);
-  cursor: pointer;
-}
-
 .carrito-acciones {
   display: flex;
   justify-content: space-between;

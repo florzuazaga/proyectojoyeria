@@ -2,6 +2,7 @@ const product = document.getElementById("conteinerproductos");
 const verCarrito = document.getElementById("vercarrito");
 const modalCarrito = document.getElementById("modal-carrito");
 const conteinerProductos = document.querySelector("#conteinerproductos");
+const cantidadCarrito = document.getElementById("cantidadCarrito");
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const getProducto = async () => {
@@ -43,28 +44,8 @@ const getProducto = async () => {
           precio: producto.precio,
           cantidad: producto.cantidad,
         });
+        carritoCounter();
         savelocal();
-      }
-    });
-  });
-  const tituloProducto = document.querySelector("#tituloproducto");
-  const botonesCategorias = document.querySelectorAll(".boton-categoria");
-  botonesCategorias.forEach((boton) => {
-    boton.addEventListener("click", (e) => {
-      botonesCategorias.forEach((boton) => boton.classList.remove("active"));
-      e.currentTarget.classList.add("active");
-      if (e.currentTarget.id != "todos") {
-        const productoCategoria = productos.find(
-          (producto) => producto.categoria.id === e.currentTarget.id
-        );
-        tituloProducto.innerText = productoCategoria.categoria.nombre;
-        const productosBoton = productos.filter(
-          (producto) => producto.categoria.id === e.currentTarget.id
-        );
-        cargarCarrito(productosBoton);
-      } else {
-        tituloProducto.innerText = "Todos los productos";
-        cargarCarrito(productos);
       }
     });
   });
@@ -99,6 +80,7 @@ const vermicarrito = () => {
       <p>${producto.cantidad}</p>
       <span id="sumar"> + </span>
       <p>${producto.cantidad * producto.precio}</p>
+      <span class="eliminar-producto">⚔</span>
     `;
     modalCarrito.append(carritoContent);
     let restar = carritoContent.querySelector("#restar");
@@ -115,13 +97,10 @@ const vermicarrito = () => {
       }
       vermicarrito();
     });
-
-    let eliminar = document.createElement("span");
-    eliminar.innerText = "⚔";
-    eliminar.className = "eliminar-producto";
-    carritoContent.append(eliminar);
-
-    eliminar.addEventListener("click", eliminarAgregado);
+    let eliminar = carritoContent.querySelector(".eliminar-producto");
+    eliminar.addEventListener("click", () => {
+      eliminarAgregado(producto.id);
+    });
   });
   const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
   const totalcomprar = document.createElement("div");
@@ -130,14 +109,21 @@ const vermicarrito = () => {
   modalCarrito.append(totalcomprar);
 };
 verCarrito.addEventListener("click", vermicarrito);
-const eliminarAgregado = () => {
-  const foundId = carrito.find((Element) => Element.id);
+const eliminarAgregado = (id) => {
+  const foundId = carrito.find((Element) => Element.id === id);
   carrito = carrito.filter((compraId) => {
     return compraId !== foundId;
   });
   savelocal();
   vermicarrito();
 };
+const carritoCounter = () => {
+  cantidadCarrito.style.display = "block";
+  const carritoLength = carrito.length;
+  localStorage.setItem("carritoLength", JSON.stringify(carritoLength));
+  cantidadCarrito.innerText = JSON.parse(localStorage.getItem("carritoLength"));
+};
+vermicarrito();
 const savelocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };

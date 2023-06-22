@@ -80,6 +80,7 @@ const vermicarrito = () => {
       <p>${producto.cantidad}</p>
       <span id="sumar"> + </span>
       <p>${producto.cantidad * producto.precio}</p>
+      <span class="eliminar-producto">⚔</span>
     `;
     modalCarrito.append(carritoContent);
     let restar = carritoContent.querySelector("#restar");
@@ -96,13 +97,10 @@ const vermicarrito = () => {
       }
       vermicarrito();
     });
-
-    let eliminar = document.createElement("span");
-    eliminar.innerText = "⚔";
-    eliminar.className = "eliminar-producto";
-    carritoContent.append(eliminar);
-
-    eliminar.addEventListener("click", eliminarAgregado);
+    let eliminar = carritoContent.querySelector(".eliminar-producto");
+    eliminar.addEventListener("click", () => {
+      eliminarAgregado(producto.id);
+    });
   });
   const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
   const totalcomprar = document.createElement("div");
@@ -111,8 +109,8 @@ const vermicarrito = () => {
   modalCarrito.append(totalcomprar);
 };
 verCarrito.addEventListener("click", vermicarrito);
-const eliminarAgregado = () => {
-  const foundId = carrito.find((Element) => Element.id);
+const eliminarAgregado = (id) => {
+  const foundId = carrito.find((Element) => Element.id === id);
   carrito = carrito.filter((compraId) => {
     return compraId !== foundId;
   });
@@ -121,8 +119,11 @@ const eliminarAgregado = () => {
 };
 const carritoCounter = () => {
   cantidadCarrito.style.display = "block";
-  cantidadCarrito.innerText = carrito.length;
+  const carritoLength = carrito.length;
+  localStorage.setItem("carritoLength", JSON.stringify(carritoLength));
+  cantidadCarrito.innerText = JSON.parse(localStorage.getItem("carritoLength"));
 };
+vermicarrito();
 const savelocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };

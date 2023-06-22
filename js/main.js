@@ -76,25 +76,27 @@ const vermicarrito = () => {
     carritoContent.innerHTML = `
       <h3 >${producto.titulo}</h3>
       <p>$${producto.precio}</p>
-      <span id="restar"> - </span>
+      <span class="restar"> - </span>
       <p>${producto.cantidad}</p>
-      <span id="sumar"> + </span>
+      <span class="sumar"> + </span>
       <p>${producto.cantidad * producto.precio}</p>
-      <span class="eliminar-producto">⚔</span>
+      <span class="eliminar-producto"> ⚔ </span>
     `;
     modalCarrito.append(carritoContent);
-    let restar = carritoContent.querySelector("#restar");
+    let restar = carritoContent.querySelector(".restar");
     restar.addEventListener("click", () => {
       if (producto.cantidad !== 1) {
         producto.cantidad--;
       }
+      savelocal();
       vermicarrito();
     });
-    let sumar = carritoContent.querySelector("#sumar");
+    let sumar = carritoContent.querySelector(".sumar");
     sumar.addEventListener("click", () => {
       if (producto.cantidad !== 1) {
         producto.cantidad++;
       }
+      savelocal();
       vermicarrito();
     });
     let eliminar = carritoContent.querySelector(".eliminar-producto");
@@ -114,6 +116,7 @@ const eliminarAgregado = (id) => {
   carrito = carrito.filter((compraId) => {
     return compraId !== foundId;
   });
+  carritoCounter();
   savelocal();
   vermicarrito();
 };

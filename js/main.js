@@ -102,29 +102,51 @@ const vermicarrito = () => {
       eliminarAgregado(producto.id);
     });
   });
-  const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
-  const totalcomprar = document.createElement("div");
-  totalcomprar.className = "totalproductos";
-  totalcomprar.innerHTML = `total a abonar:${total}`;
-  modalCarrito.append(totalcomprar);
-};
-verCarrito.addEventListener("click", vermicarrito);
-const eliminarAgregado = (id) => {
-  const foundId = carrito.find((Element) => Element.id === id);
-  carrito = carrito.filter((compraId) => {
-    return compraId !== foundId;
+  let btnsSumar = document.querySelectorAll(".sumar"); // []
+  btnsSumar.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const id = e.target.id;
+      const indice = carrito.findIndex((p) => p.id === id);
+      console.log(indice);
+      carrito[indice].cantidad++;
+      vermicarrito();
+    });
+    let btnsRestar = document.querySelectorAll(".restar"); // []
+    btnsRestar.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const id = e.target.id;
+        const indice = carrito.findIndex((p) => p.id === id);
+        console.log(indice);
+        carrito[indice].cantidad--;
+        vermicarrito();
+      });
+    });
+    const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
+    const totalcomprar = document.createElement("div");
+    totalcomprar.className = "totalproductos";
+    totalcomprar.innerHTML = `total a abonar:${total}`;
+    modalCarrito.append(totalcomprar);
   });
-  carritoCounter();
-  savelocal();
+  verCarrito.addEventListener("click", vermicarrito);
+  const eliminarAgregado = (id) => {
+    const foundId = carrito.find((Element) => Element.id === id);
+    carrito = carrito.filter((compraId) => {
+      return compraId !== foundId;
+    });
+    carritoCounter();
+    savelocal();
+    vermicarrito();
+  };
+  const carritoCounter = () => {
+    cantidadCarrito.style.display = "block";
+    const carritoLength = carrito.length;
+    localStorage.setItem("carritoLength", JSON.stringify(carritoLength));
+    cantidadCarrito.innerText = JSON.parse(
+      localStorage.getItem("carritoLength")
+    );
+  };
   vermicarrito();
-};
-const carritoCounter = () => {
-  cantidadCarrito.style.display = "block";
-  const carritoLength = carrito.length;
-  localStorage.setItem("carritoLength", JSON.stringify(carritoLength));
-  cantidadCarrito.innerText = JSON.parse(localStorage.getItem("carritoLength"));
-};
-vermicarrito();
-const savelocal = () => {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+  const savelocal = () => {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  };
 };

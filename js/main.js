@@ -44,6 +44,7 @@ const getProducto = async () => {
           precio: producto.precio,
           cantidad: producto.cantidad,
         });
+        carritoCounter();
         savelocal();
       }
     });

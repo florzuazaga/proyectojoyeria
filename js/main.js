@@ -137,10 +137,10 @@ const vermicarrito = () => {
     savelocal();
     vermicarrito();
   };
-  vermicarrito();
-  const savelocal = () => {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-  };
+};
+vermicarrito();
+const savelocal = () => {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
 const carritoCounter = () => {
